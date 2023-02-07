@@ -14,25 +14,25 @@ export type SpacingProps = {
 
 export const paddingSpacingToStyle = (spacing: SpacingProps): string => {
     return classNames(
-        ptSpacingToStyle[spacing.t || 'n'],
-        pbSpacingToStyle[spacing.b || 'n'],
-        plSpacingToStyle[spacing.l || 'n'],
-        prSpacingToStyle[spacing.r || 'n'],
-        pxSpacingToStyle[spacing.x || 'n'],
-        pySpacingToStyle[spacing.y || 'n'],
-        pSpacingToStyle[spacing.all || 'n']
+        spacing.t ? ptSpacingToStyle[spacing.t] : '',
+        spacing.b ? pbSpacingToStyle[spacing.b] : '',
+        spacing.l ? plSpacingToStyle[spacing.l] : '',
+        spacing.r ? prSpacingToStyle[spacing.r] : '',
+        spacing.x ? pxSpacingToStyle[spacing.x] : '',
+        spacing.y ? pySpacingToStyle[spacing.y] : '',
+        spacing.all ? pSpacingToStyle[spacing.all] : '',
     )
 }
 
 export const marginSpacingToStyle = (spacing: SpacingProps): string => {
     return classNames(
-        mtSpacingToStyle[spacing.t || 'n'],
-        mbSpacingToStyle[spacing.b || 'n'],
-        mlSpacingToStyle[spacing.l || 'n'],
-        mrSpacingToStyle[spacing.r || 'n'],
-        mxSpacingToStyle[spacing.x || 'n'],
-        mySpacingToStyle[spacing.y || 'n'],
-        mSpacingToStyle[spacing.all || 'n']
+        spacing.t ? mtSpacingToStyle[spacing.t] : '',
+        spacing.b ? mbSpacingToStyle[spacing.b] : '',
+        spacing.l ? mlSpacingToStyle[spacing.l] : '',
+        spacing.r ? mrSpacingToStyle[spacing.r] : '',
+        spacing.x ? mxSpacingToStyle[spacing.x] : '',
+        spacing.y ? mySpacingToStyle[spacing.y] : '',
+        spacing.all ? mSpacingToStyle[spacing.all] : '',
     )
 }
 
