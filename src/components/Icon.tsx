@@ -31,9 +31,9 @@ const IconColorStyles: Record<IconColor, string> = {
     white: 'text-white',
     gray: 'text-gray-400',
     primary: 'text-indigo-600',
-    secondary: 'text-sky-600',
+    secondary: 'text-sky-500',
     success: 'text-lime-600',
     error: 'text-red-600',
-    warning: 'text-amber-600',
+    warning: 'text-amber-500',
     inherit: 'text-inherit',
 }
