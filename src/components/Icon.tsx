@@ -3,7 +3,7 @@ import { classNames } from '../internal/class-compiler'
 import { IconSvgPath, IconType } from '../internal/icons'
 
 type IconSize = 'sm' | 'md' | 'lg'
-type IconColor = 'black' | 'white' | 'gray' | 'primary' | 'success' | 'error' | 'warning' | 'inherit'
+type IconColor = 'black' | 'white' | 'gray' | 'primary' | 'secondary' | 'success' | 'error' | 'warning' | 'inherit'
 
 export interface IconProps {
     // Properties
@@ -31,6 +31,7 @@ const IconColorStyles: Record<IconColor, string> = {
     white: 'text-white',
     gray: 'text-gray-400',
     primary: 'text-indigo-600',
+    secondary: 'text-sky-600',
     success: 'text-lime-600',
     error: 'text-red-600',
     warning: 'text-amber-600',
