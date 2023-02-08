@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Box, Button, Icon } from './components'
+import { Box, Button, Icon, Link } from './components'
 import { IconType } from './internal/icons'
 
 const App = () => (
@@ -32,16 +32,24 @@ const App = () => (
                             </Button>
                             <Button variant='outline' icon='close'></Button>
                         </Box>
-                        <Box variant='sub'>
+                        <Box variant='p'>
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis aliquam ullam, perferendis id commodi alias minima rerum repellendus perspiciatis veritatis ea quo
                             maiores unde, eius labore quia doloribus quod praesentium facere numquam voluptates temporibus. Officiis, provident corporis! Rerum pariatur ad, eos sit mollitia id ipsam
                             nostrum ex minima modi rem reiciendis consectetur! Nihil id, blanditiis vitae ratione ipsam, culpa qui tempore molestias hic ipsum amet iusto voluptates voluptatum modi
-                            nostrum facere repudiandae eligendi, debitis placeat. Iste nesciunt nobis, incidunt praesentium expedita aliquam omnis. Voluptatibus doloribus error quisquam fugiat
-                            corporis repudiandae architecto autem vero vitae dolores, aperiam nulla accusamus eveniet iste, placeat non illum? Excepturi similique culpa natus corrupti praesentium sit.
-                            Quia velit quod tempore nesciunt nam enim ab in. Accusamus quas repellendus numquam nostrum, quod deserunt iste. Aut, animi eveniet fugiat saepe eius tempore dolorem a
-                            laboriosam quo, nam, inventore vero magnam recusandae! Quidem laudantium nisi veritatis, blanditiis cumque officia animi quae commodi minus, molestias dolor voluptates
-                            eaque adipisci eos earum placeat accusantium maiores provident nulla enim. Rerum sequi debitis impedit. Perferendis accusantium ea vel corrupti saepe itaque. Placeat
-                            voluptatem quisquam culpa ratione alias perspiciatis excepturi, nesciunt voluptas ad nulla repellendus minus quas quaerat soluta. Commodi facilis nulla alias ullam!
+                            nostrum facere{' '}
+                            <Link href='#' icon='adjustments' color='link' disabled>
+                                External
+                            </Link>{' '}
+                            repudiandae eligendi, debitis placeat. Iste nesciunt nobis, incidunt praesentium expedita aliquam omnis. Voluptatibus doloribus error quisquam fugiat corporis repudiandae
+                            architecto autem vero vitae dolores, aperiam nulla accusamus eveniet iste, placeat non illum? Excepturi similique culpa natus corrupti praesentium sit. Quia velit quod
+                            tempore nesciunt{' '}
+                            <Link variant='internal' href='#' icon='adjustments' color='inherit'>
+                                Inernal Link
+                            </Link>{' '}
+                            nam enim ab in. Accusamus quas repellendus numquam nostrum, quod deserunt iste. Aut, animi eveniet fugiat saepe eius tempore dolorem a laboriosam quo, nam, inventore vero
+                            magnam recusandae! Quidem laudantium nisi veritatis, blanditiis cumque officia animi quae commodi minus, molestias dolor voluptates eaque adipisci eos earum placeat
+                            accusantium maiores provident nulla enim. Rerum sequi debitis impedit. Perferendis accusantium ea vel corrupti saepe itaque. Placeat voluptatem quisquam culpa ratione alias
+                            perspiciatis excepturi, nesciunt voluptas ad nulla repellendus minus quas quaerat soluta. Commodi facilis nulla alias ullam!
                         </Box>
                         <IconShowcase />
                         <Box margin={{ b: 'xs' }}></Box>
