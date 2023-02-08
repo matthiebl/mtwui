@@ -1,9 +1,10 @@
 import React, { Children } from 'react'
 import { classNames } from '../internal/class-compiler'
 import { IconType } from '../internal/icons'
+import { Icon } from './Icon'
 
 type ButtonColor = 'primary' | 'secondary' | 'success' | 'error' | 'warning'
-type ButtonVariant = 'filled' | 'outline' | 'text' | 'icon'
+type ButtonVariant = 'filled' | 'outline'
 
 type ButtonDetail = {
     event: any
@@ -14,7 +15,6 @@ export interface ButtonProps {
     color?: ButtonColor
     variant?: ButtonVariant
     icon?: IconType
-    iconAlign?: 'left' | 'right'
     fullWidth?: boolean
     disabled?: boolean
 
@@ -25,18 +25,25 @@ export interface ButtonProps {
     onClick?: (detail: ButtonDetail) => any
 }
 
-export const Button: React.FC<ButtonProps> = ({ color = 'primary', variant = 'filled', icon, iconAlign = 'left', fullWidth = false, disabled = false, children, onClick = () => {} }) => {
+export const Button: React.FC<ButtonProps> = ({ color = 'primary', variant = 'filled', icon, fullWidth = false, disabled = false, children, onClick = () => {} }) => {
     return (
         <button
+            type='button'
             className={classNames(
-                'text-small inline-flex items-center border py-2 px-4 font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2',
-                fullWidth ? 'w-full' : 'w-fit',
+                'inline-flex items-center justify-center rounded-md border text-sm focus:outline-none focus:ring-2 focus:ring-offset-2',
+                children ? 'py-2 px-4' : 'p-2',
+                fullWidth ? 'w-full' : '',
                 ButtonVariantStyles[variant],
-                variant === 'filled' || variant === 'icon' ? ButtonColorStyles[color] : '',
+                variant === 'filled' ? ButtonColorStyles[color] : '',
             )}
             disabled={disabled}
             onClick={event => onClick({ event })}
         >
+            {icon && (
+                <div className={classNames('h-5 w-5', children ? '-ml-1 mr-2' : '', variant === 'outline' ? 'text-gray-500' : '')}>
+                    <Icon type={icon} size='sm' color='inherit' />
+                </div>
+            )}
             {children}
         </button>
     )
@@ -51,8 +58,6 @@ const ButtonColorStyles: Record<ButtonColor, string> = {
 }
 
 const ButtonVariantStyles: Record<ButtonVariant, string> = {
-    filled: 'rounded-md border-transparent text-white',
-    outline: 'rounded-md border-gray-300 bg-white text-gray-700 hover:bg-gray-50 focus:ring-indigo-500',
-    text: 'rounded-md border-transparent',
-    icon: 'rounded-full border-transparent',
+    filled: 'shadow-sm border-transparent text-white disabled:bg-gray-300',
+    outline: 'shadow-sm border-gray-300 bg-white text-gray-700 hover:bg-gray-50 focus:ring-indigo-500 disabled:bg-white disabled:text-gray-400',
 }
