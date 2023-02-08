@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Box, Icon } from './components'
+import { Box, Button, Icon } from './components'
 import { IconType } from './internal/icons'
 
 const App = () => (
@@ -16,6 +16,21 @@ const App = () => (
                         <Box variant='h5'>Heading 5</Box>
                         <Box variant='p'>
                             <Icon type='warning' /> Normal text <Icon type='edit' />
+                        </Box>
+                        <Box>
+                            <Button>Hello</Button>
+                            <Button variant='outline' icon='edit' disabled>
+                                Hello
+                            </Button>
+                            <Button color='error' icon='warning' disabled fullWidth onClick={() => console.log('hello')}>
+                                Hello
+                            </Button>
+                            <Button color='success'>Hello</Button>
+                            <Button color='warning' icon='warning' disabled />
+                            <Button variant='outline' color='primary'>
+                                This is an outlined button
+                            </Button>
+                            <Button variant='outline' icon='close'></Button>
                         </Box>
                         <Box variant='sub'>
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis aliquam ullam, perferendis id commodi alias minima rerum repellendus perspiciatis veritatis ea quo
@@ -122,7 +137,7 @@ const IconShowcase = () => {
     return (
         <Box>
             {types.map(type => (
-                <Icon type={type} />
+                <Icon type={type} key={crypto.randomUUID()} />
             ))}
         </Box>
     )
