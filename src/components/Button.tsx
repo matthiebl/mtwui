@@ -25,7 +25,13 @@ export interface ButtonProps {
     onClick?: (detail: ButtonDetail) => any
 }
 
-export const Button: React.FC<ButtonProps> = ({ color = 'primary', variant = 'filled', icon, fullWidth = false, disabled = false, children, onClick = () => {} }) => {
+export const Button: React.FC<ButtonProps> = ({ color = 'primary', variant = 'filled', icon, fullWidth = false, disabled = false, children, onClick }) => {
+    const _onClick: React.MouseEventHandler<HTMLButtonElement> = event => {
+        if (onClick) {
+            onClick({ event })
+        }
+    }
+
     return (
         <button
             type='button'
@@ -37,7 +43,7 @@ export const Button: React.FC<ButtonProps> = ({ color = 'primary', variant = 'fi
                 variant === 'filled' ? ButtonColorStyles[color] : '',
             )}
             disabled={disabled}
-            onClick={event => onClick({ event })}
+            onClick={_onClick}
         >
             {icon && (
                 <div className={classNames('h-5 w-5', children ? '-ml-1 mr-2' : '', variant === 'outline' ? 'text-gray-500' : '')}>
