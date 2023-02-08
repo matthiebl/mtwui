@@ -3,7 +3,7 @@ import { classNames } from '../internal/class-compiler'
 import { IconType } from '../internal/icons'
 import { Icon } from './Icon'
 
-type LinkColor = 'link' | 'inherit'
+type LinkColor = 'link' | 'primary' | 'inherit'
 
 type LinkDetail = {
     href: string
@@ -38,7 +38,7 @@ export const Link: React.FC<LinkProps> = ({ variant = 'external', color = 'link'
         }
     }
 
-    const styles = classNames('underline-offset-2 hover:underline aria-disabled:pointer-events-none aria-disabled:text-gray-500', LinkColorStyles[color])
+    const styles = classNames('inline-flex items-center underline-offset-2 hover:underline aria-disabled:pointer-events-none aria-disabled:text-gray-500', LinkColorStyles[color])
 
     if (variant === 'external') {
         return (
@@ -70,5 +70,6 @@ export const Link: React.FC<LinkProps> = ({ variant = 'external', color = 'link'
 
 const LinkColorStyles: Record<LinkColor, string> = {
     link: 'text-sky-500',
+    primary: 'text-indigo-500',
     inherit: 'text-inherit',
 }
