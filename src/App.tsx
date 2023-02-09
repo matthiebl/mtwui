@@ -57,7 +57,8 @@ const App = () => {
                                 ratione alias perspiciatis excepturi, nesciunt voluptas ad nulla repellendus minus quas quaerat soluta. Commodi facilis nulla alias ullam!
                             </Box>
                             <Input type='number' value={v1} placeholder='Email address' onChange={detail => setV1(detail.value)} />
-                            <Checkbox checked={!checked} disabled onChange={detail => setChecked(detail.checked)} />
+                            <Checkbox checked={checked} onChange={detail => setChecked(detail.checked)} label='Remember me?' />
+                            <Checkbox disabled checked={checked} onChange={detail => setChecked(detail.checked)} label='Remember me?' />
                             <IconShowcase />
                             <Box margin={{ b: 'xs' }}></Box>
                             <Box variant='sub'>Subscript text</Box>

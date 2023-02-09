@@ -29,14 +29,21 @@ export const Checkbox: React.FC<CheckboxProps> = ({ label, checked = false, disa
     }
 
     return (
-        <input
-            id={id}
-            type='checkbox'
-            checked={checked}
-            disabled={disabled}
-            required={required}
-            onChange={_onChange}
-            className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 disabled:border-gray-400 disabled:bg-gray-400 disabled:text-gray-400'
-        />
+        <div className='flex items-center'>
+            <input
+                id={id}
+                type='checkbox'
+                checked={checked}
+                disabled={disabled}
+                required={required}
+                onChange={_onChange}
+                className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 disabled:border-gray-400 disabled:bg-gray-400 disabled:text-gray-400'
+            />
+            {label && (
+                <label htmlFor={id} className='ml-2 text-sm text-gray-900'>
+                    {label}
+                </label>
+            )}
+        </div>
     )
 }
