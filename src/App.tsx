@@ -58,7 +58,7 @@ const App = () => {
                             </Box>
                             <Input type='number' value={v1} placeholder='Email address' onChange={detail => setV1(detail.value)} />
 
-                            <Textarea value={''} placeholder={'This is placeholder \ntext'} rows={10} fullWidth />
+                            <Textarea value={''} placeholder={'This is placeholder \ntext'} rows={10} />
 
                             <Checkbox checked={checked} onChange={detail => setChecked(detail.checked)} label='Remember me?' />
                             <Checkbox disabled checked={checked} onChange={detail => setChecked(detail.checked)} label='Remember me?' />
