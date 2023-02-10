@@ -61,7 +61,7 @@ const App = () => {
                             <Checkbox disabled checked={checked} onChange={detail => setChecked(detail.checked)} label='Remember me?' />
 
                             <RadioGroup
-                                value={null}
+                                value={'two'}
                                 items={[
                                     {
                                         value: 'one',

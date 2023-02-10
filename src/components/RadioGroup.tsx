@@ -43,6 +43,7 @@ export const RadioGroup: React.FC<RadioGroupProps> = ({ name = crypto.randomUUID
                             name={name}
                             type='radio'
                             value={item.value}
+                            checked={item.value === value}
                             disabled={item.disabled || false}
                             onChange={_onChange}
                             className='mt-0.5 h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500 disabled:border-gray-400 disabled:bg-gray-400 disabled:text-gray-400'
