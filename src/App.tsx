@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Box, Button, Checkbox, Icon, Input, Link } from './components'
+import { Box, Button, Checkbox, Icon, Input, Link, RadioGroup } from './components'
 import { IconType } from './internal/icons'
 
 const App = () => {
@@ -59,6 +59,31 @@ const App = () => {
                             <Input type='number' value={v1} placeholder='Email address' onChange={detail => setV1(detail.value)} />
                             <Checkbox checked={checked} onChange={detail => setChecked(detail.checked)} label='Remember me?' />
                             <Checkbox disabled checked={checked} onChange={detail => setChecked(detail.checked)} label='Remember me?' />
+
+                            <RadioGroup
+                                value={'two'}
+                                items={[
+                                    {
+                                        value: 'one',
+                                        label: 'One',
+                                        description: 'This is option 1',
+                                    },
+                                    {
+                                        value: 'two',
+                                        label: 'Two',
+                                        description: 'This is option 2',
+                                        disabled: true,
+                                    },
+                                    {
+                                        value: 'three',
+                                        label: 'Three',
+                                        description: 'This is option 3',
+                                        disabled: false,
+                                    },
+                                ]}
+                                onChange={detail => console.log(detail)}
+                            />
+
                             <IconShowcase />
                             <Box margin={{ b: 'xs' }}></Box>
                             <Box variant='sub'>Subscript text</Box>
