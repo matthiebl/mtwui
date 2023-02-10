@@ -71,14 +71,17 @@ const App = () => {
                                     {
                                         value: 'two',
                                         label: 'Two',
-                                        // description: 'This is option 2',
+                                        description: 'This is option 2',
+                                        disabled: true,
                                     },
                                     {
                                         value: 'three',
                                         label: 'Three',
-                                        // description: 'This is option 3',
+                                        description: 'This is option 3',
+                                        disabled: false,
                                     },
                                 ]}
+                                onChange={detail => console.log(detail)}
                             />
 
                             <IconShowcase />

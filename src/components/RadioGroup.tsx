@@ -10,7 +10,6 @@ type RadioGroupItem = {
 type RadioGroupDetail = {
     event: any
     value: string
-    label: string
 }
 
 export interface RadioGroupProps {
@@ -24,13 +23,30 @@ export interface RadioGroupProps {
 }
 
 export const RadioGroup: React.FC<RadioGroupProps> = ({ name = crypto.randomUUID(), value, items = [], onChange }) => {
+    const _onChange: React.ChangeEventHandler<HTMLInputElement> = event => {
+        if (onChange) {
+            onChange({
+                event,
+                value: event.target.value,
+            })
+        }
+    }
+
     return (
-        <div className='flex flex-col gap-1.5'>
+        <div className='flex flex-col gap-0.5'>
             {items.map(item => {
                 const id = crypto.randomUUID()
                 return (
-                    <div className='flex gap-2 text-sm'>
-                        <input id={id} name={name} type='radio' value={item.value} disabled={item.disabled || false} className='mt-0.5' />
+                    <div key={id} className='flex gap-2 text-sm'>
+                        <input
+                            id={id}
+                            name={name}
+                            type='radio'
+                            value={item.value}
+                            disabled={item.disabled || false}
+                            onChange={_onChange}
+                            className='mt-0.5 h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500 disabled:border-gray-400 disabled:bg-gray-400 disabled:text-gray-400'
+                        />
                         <div className='flex flex-col'>
                             <label htmlFor={id} className='text-gray-900'>
                                 {item.label}
