@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Box, Button, ButtonDropdown, Checkbox, Icon, Input, Link, RadioGroup, Switch, Textarea, Tooltip, TooltipAlign } from './components'
+import { Box, Button, ButtonDropdown, Checkbox, Icon, Input, Link, MenuItems, RadioGroup, Switch, Textarea, Tooltip, TooltipAlign } from './components'
 import { IconType } from './internal/icons'
 
 const App = () => {
@@ -99,7 +99,36 @@ const App = () => {
                                     </div>
                                 </Tooltip>
                                 <ButtonDropdown align={tooltip} buttonText='This is a dropdown'>
-                                    Hello
+                                    <MenuItems
+                                        items={[
+                                            {
+                                                type: 'link',
+                                                label: 'First option and option and option and option',
+                                                href: '/',
+                                                onClick: detail => detail.event.preventDefault(),
+                                            },
+                                            {
+                                                type: 'divider',
+                                            },
+                                            {
+                                                type: 'link',
+                                                label: 'Another link',
+                                                href: '/',
+                                                onClick: detail => detail.event.preventDefault(),
+                                            },
+                                            {
+                                                type: 'button',
+                                                label: 'A button in the dropdown',
+                                                onClick: detail => detail.event.preventDefault(),
+                                            },
+                                            {
+                                                type: 'button',
+                                                label: 'A button in the dropdown',
+                                                color: 'error',
+                                                onClick: detail => detail.event.preventDefault(),
+                                            },
+                                        ]}
+                                    />
                                 </ButtonDropdown>
                             </div>
 
