@@ -1,12 +1,14 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Box, Button, ButtonDropdown, Checkbox, Icon, Input, Link, RadioGroup, Switch, Textarea, Tooltip } from './components'
+import { Box, Button, ButtonDropdown, Checkbox, Icon, Input, Link, RadioGroup, Switch, Textarea, Tooltip, TooltipAlign } from './components'
 import { IconType } from './internal/icons'
 
 const App = () => {
     const [v1, setV1] = React.useState('')
     const [checked, setChecked] = React.useState(false)
     const [switched, setSwitched] = React.useState(false)
+
+    const [tooltip, setTooltip] = React.useState<TooltipAlign>('right')
 
     return (
         <BrowserRouter>
@@ -71,41 +73,35 @@ const App = () => {
                             </Button>
 
                             <RadioGroup
-                                value={'two'}
+                                value={tooltip}
                                 items={[
-                                    {
-                                        value: 'one',
-                                        label: 'One',
-                                        description: 'This is option 1',
-                                    },
-                                    {
-                                        value: 'two',
-                                        label: 'Two',
-                                        description: 'This is option 2',
-                                        disabled: true,
-                                    },
-                                    {
-                                        value: 'three',
-                                        label: 'Three',
-                                        description: 'This is option 3',
-                                        disabled: false,
-                                    },
+                                    { value: 'top-left', label: 'Top left' },
+                                    { value: 'top', label: 'Top' },
+                                    { value: 'top-right', label: 'Top right' },
+                                    { value: 'right-top', label: 'Right top' },
+                                    { value: 'right', label: 'Right' },
+                                    { value: 'right-bottom', label: 'Right bottom' },
+                                    { value: 'bottom-left', label: 'Bottom left' },
+                                    { value: 'bottom', label: 'Bottom' },
+                                    { value: 'bottom-right', label: 'Bottom right' },
+                                    { value: 'left-top', label: 'Left top' },
+                                    { value: 'left', label: 'Left' },
+                                    { value: 'left-bottom', label: 'Left bottom' },
                                 ]}
-                                onChange={detail => console.log(detail)}
+                                onChange={detail => setTooltip(detail.value as TooltipAlign)}
                             />
 
-                            <div className='my-60 flex justify-center'>
-                                <Tooltip control={checked} align='right-bottom' controller={<Button>Tooltip Central</Button>} variant='light' arrowTip>
+                            <div className='my-60 flex flex-col items-center gap-48'>
+                                <Tooltip control={checked} align={tooltip} controller={<Button>Tooltip Central</Button>} variant='light' arrowTip>
                                     <div className='flex flex-col'>
                                         <p>Hello</p>
                                         <p>Cool</p>
                                     </div>
                                 </Tooltip>
+                                <ButtonDropdown align={tooltip} buttonText='This is a dropdown'>
+                                    Hello
+                                </ButtonDropdown>
                             </div>
-
-                            <ButtonDropdown align='right' buttonText='This is a dropdown'>
-                                Hello
-                            </ButtonDropdown>
 
                             <IconShowcase />
                             <Box margin={{ b: 'xs' }}></Box>
