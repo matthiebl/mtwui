@@ -1,8 +1,8 @@
 import React from 'react'
 import { classNames } from '../internal/class-compiler'
 
-type TooltipAlign = 'top-left' | 'top' | 'top-right' | 'right-top' | 'right' | 'right-bottom' | 'bottom-left' | 'bottom' | 'bottom-right' | 'left-top' | 'left' | 'left-bottom'
-type TooltipVariant = 'custom' | 'light' | 'dark'
+export type TooltipAlign = 'top-left' | 'top' | 'top-right' | 'right-top' | 'right' | 'right-bottom' | 'bottom-left' | 'bottom' | 'bottom-right' | 'left-top' | 'left' | 'left-bottom'
+export type TooltipVariant = 'custom' | 'light' | 'dark'
 
 export interface TooltipProps {
     // Properties
@@ -13,16 +13,19 @@ export interface TooltipProps {
 
     // Slots
     children?: React.ReactNode
-    tooltip?: React.ReactNode
+    controller?: React.ReactNode
+
+    // Events
+    onClick?: React.MouseEventHandler<HTMLDivElement>
 }
 
-export const Tooltip: React.FC<TooltipProps> = ({ control, align = 'right', arrowTip = false, variant = 'light', children, tooltip }) => {
+export const Tooltip: React.FC<TooltipProps> = ({ control, align = 'right', arrowTip = false, variant = 'light', children, controller, onClick }) => {
     const hasArrow = variant === 'custom' ? false : arrowTip
     const isHidden = control === 'hover' ? false : !control
 
     return (
         <div className={classNames('group relative flex', containerAlignStyles[align])}>
-            <div>{children}</div>
+            <div>{controller}</div>
             {hasArrow && (
                 <div
                     aria-hidden={isHidden}
@@ -42,8 +45,9 @@ export const Tooltip: React.FC<TooltipProps> = ({ control, align = 'right', arro
                     tooltipVariantStyles[variant],
                     tooltipAlignStyles[align],
                 )}
+                onClick={onClick}
             >
-                {tooltip}
+                {children}
             </div>
         </div>
     )
