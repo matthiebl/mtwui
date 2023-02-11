@@ -3,10 +3,10 @@ import { classNames } from '../internal/class-compiler'
 import { IconType } from '../internal/icons'
 import { Icon } from './Icon'
 
-type ButtonColor = 'primary' | 'secondary' | 'success' | 'error' | 'warning'
-type ButtonVariant = 'filled' | 'outline'
+export type ButtonColor = 'primary' | 'secondary' | 'success' | 'error' | 'warning'
+export type ButtonVariant = 'filled' | 'outline'
 
-type ButtonDetail = {
+export type ButtonDetail = {
     event: any
 }
 

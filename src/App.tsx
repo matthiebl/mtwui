@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Box, Button, Checkbox, Icon, Input, Link, RadioGroup, Switch, Textarea, Tooltip } from './components'
+import { Box, Button, ButtonDropdown, Checkbox, Icon, Input, Link, RadioGroup, Switch, Textarea, Tooltip } from './components'
 import { IconType } from './internal/icons'
 
 const App = () => {
@@ -95,21 +95,17 @@ const App = () => {
                             />
 
                             <div className='my-60 flex justify-center'>
-                                <Tooltip
-                                    control={checked}
-                                    align='right-bottom'
-                                    tooltip={
-                                        <div className='flex flex-col'>
-                                            <p>Hello</p>
-                                            <p>Cool</p>
-                                        </div>
-                                    }
-                                    variant='light'
-                                    arrowTip
-                                >
-                                    <Button>Tooltip Central</Button>
+                                <Tooltip control={checked} align='right-bottom' controller={<Button>Tooltip Central</Button>} variant='light' arrowTip>
+                                    <div className='flex flex-col'>
+                                        <p>Hello</p>
+                                        <p>Cool</p>
+                                    </div>
                                 </Tooltip>
                             </div>
+
+                            <ButtonDropdown align='right' buttonText='This is a dropdown'>
+                                Hello
+                            </ButtonDropdown>
 
                             <IconShowcase />
                             <Box margin={{ b: 'xs' }}></Box>
