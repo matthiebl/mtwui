@@ -40,7 +40,7 @@ export const Tooltip: React.FC<TooltipProps> = ({ control, align = 'right', arro
             <div
                 aria-hidden={isHidden}
                 className={classNames(
-                    'absolute z-50 transition duration-150',
+                    'absolute z-50 w-max transition duration-150',
                     control === 'hover' ? 'group scale-0 group-hover:scale-100' : 'scale-100 aria-hidden:scale-0',
                     tooltipVariantStyles[variant],
                     tooltipAlignStyles[align],
