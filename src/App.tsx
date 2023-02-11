@@ -1,11 +1,12 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Box, Button, Checkbox, Icon, Input, Link, RadioGroup, Textarea } from './components'
+import { Box, Button, Checkbox, Icon, Input, Link, RadioGroup, Switch, Textarea } from './components'
 import { IconType } from './internal/icons'
 
 const App = () => {
     const [v1, setV1] = React.useState('')
     const [checked, setChecked] = React.useState(false)
+    const [switched, setSwitched] = React.useState(false)
 
     return (
         <BrowserRouter>
@@ -62,6 +63,8 @@ const App = () => {
 
                             <Checkbox checked={checked} onChange={detail => setChecked(detail.checked)} label='Remember me?' />
                             <Checkbox disabled checked={checked} onChange={detail => setChecked(detail.checked)} label='Remember me?' />
+
+                            <Switch disabled={checked} checked={switched} onChange={detail => setSwitched(detail.checked)} label='Private' />
 
                             <RadioGroup
                                 value={'two'}
