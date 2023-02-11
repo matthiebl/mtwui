@@ -15,6 +15,7 @@ export interface ButtonProps {
     color?: ButtonColor
     variant?: ButtonVariant
     icon?: IconType
+    iconAlign?: 'left' | 'right'
     fullWidth?: boolean
     disabled?: boolean
 
@@ -25,7 +26,7 @@ export interface ButtonProps {
     onClick?: (detail: ButtonDetail) => any
 }
 
-export const Button: React.FC<ButtonProps> = ({ color = 'primary', variant = 'filled', icon, fullWidth = false, disabled = false, children, onClick }) => {
+export const Button: React.FC<ButtonProps> = ({ color = 'primary', variant = 'filled', icon, iconAlign = 'left', fullWidth = false, disabled = false, children, onClick }) => {
     const _onClick: React.MouseEventHandler<HTMLButtonElement> = event => {
         if (onClick) {
             onClick({ event })
@@ -37,6 +38,7 @@ export const Button: React.FC<ButtonProps> = ({ color = 'primary', variant = 'fi
             type='button'
             className={classNames(
                 'inline-flex items-center justify-center rounded-md border text-sm focus:outline-none focus:ring-2 focus:ring-offset-2',
+                iconAlign === 'right' ? 'flex-row-reverse' : 'flex-row',
                 children ? 'py-2 px-4' : 'p-2',
                 fullWidth ? 'w-full' : '',
                 ButtonVariantStyles[variant],
@@ -46,7 +48,7 @@ export const Button: React.FC<ButtonProps> = ({ color = 'primary', variant = 'fi
             onClick={_onClick}
         >
             {icon && (
-                <div className={classNames('h-5 w-5', children ? '-ml-1 mr-2' : '', variant === 'outline' ? 'text-gray-500' : '')}>
+                <div className={classNames('h-5 w-5', children ? (iconAlign === 'left' ? '-ml-1 mr-2' : '-mr-1 ml-2') : '', variant === 'outline' ? 'text-gray-500' : '')}>
                     <Icon type={icon} size='sm' color='inherit' />
                 </div>
             )}
