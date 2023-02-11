@@ -96,7 +96,8 @@ const App = () => {
 
                             <div className='my-60 flex justify-center'>
                                 <Tooltip
-                                    control='hover'
+                                    control={checked}
+                                    align='right-bottom'
                                     tooltip={
                                         <div className='flex flex-col'>
                                             <p>Hello</p>
