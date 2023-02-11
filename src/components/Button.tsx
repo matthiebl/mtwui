@@ -37,7 +37,7 @@ export const Button: React.FC<ButtonProps> = ({ color = 'primary', variant = 'fi
         <button
             type='button'
             className={classNames(
-                'inline-flex items-center justify-center rounded-md border text-sm focus:outline-none focus:ring-2 focus:ring-offset-2',
+                'flex items-center justify-center rounded-md border text-sm focus:outline-none focus:ring-2 focus:ring-offset-2',
                 iconAlign === 'right' ? 'flex-row-reverse' : 'flex-row',
                 children ? 'py-2 px-4' : 'p-2',
                 fullWidth ? 'w-full' : '',
