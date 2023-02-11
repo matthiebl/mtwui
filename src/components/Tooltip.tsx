@@ -21,10 +21,27 @@ export const Tooltip: React.FC<TooltipProps> = ({ control, align = 'right', arro
     const isHidden = control === 'hover' ? false : control
 
     return (
-        <div className={classNames('relative flex', containerAlignStyles[align])}>
+        <div className={classNames('group relative flex', containerAlignStyles[align])}>
             <div>{children}</div>
-            {hasArrow && <div className={classNames('absolute z-50 h-3 w-3 rotate-45 rounded-sm', arrowVariantStyles[variant], arrowAlignStyles[align])} />}
-            <div aria-hidden={isHidden} className={classNames('absolute z-50', tooltipVariantStyles[variant], tooltipAlignStyles[align])}>
+            {hasArrow && (
+                <div
+                    className={classNames(
+                        'absolute z-50 h-3 w-3 rotate-45 rounded-sm transition duration-150',
+                        control === 'hover' ? 'group scale-0 group-hover:scale-100' : '',
+                        arrowVariantStyles[variant],
+                        arrowAlignStyles[align],
+                    )}
+                />
+            )}
+            <div
+                aria-hidden={isHidden}
+                className={classNames(
+                    'absolute z-50 transition duration-150',
+                    control === 'hover' ? 'group scale-0 group-hover:scale-100' : '',
+                    tooltipVariantStyles[variant],
+                    tooltipAlignStyles[align],
+                )}
+            >
                 {tooltip}
             </div>
         </div>
