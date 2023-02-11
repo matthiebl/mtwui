@@ -24,7 +24,7 @@ export const Tooltip: React.FC<TooltipProps> = ({ control, align = 'right', arro
     const isHidden = control === 'hover' ? false : !control
 
     return (
-        <div className={classNames('group relative flex', containerAlignStyles[align])}>
+        <div className={classNames('group relative flex h-fit w-fit', containerAlignStyles[align])}>
             <div>{controller}</div>
             {hasArrow && (
                 <div
