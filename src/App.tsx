@@ -66,7 +66,7 @@ const App = () => {
 
                             <Switch disabled={checked} checked={switched} onChange={detail => setSwitched(detail.checked)} label='Private' />
 
-                            <Button icon='chevron-down' iconAlign='right'>
+                            <Button icon='ellipsis-vertical' iconAlign='right'>
                                 Button dropdown
                             </Button>
 

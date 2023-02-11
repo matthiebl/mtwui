@@ -48,7 +48,7 @@ export const Button: React.FC<ButtonProps> = ({ color = 'primary', variant = 'fi
             onClick={_onClick}
         >
             {icon && (
-                <div className={classNames('h-5 w-5', children ? (iconAlign === 'left' ? '-ml-1 mr-2' : '-mr-1 ml-2') : '', variant === 'outline' ? 'text-gray-500' : '')}>
+                <div className={classNames('flex h-5 w-5 items-center', children ? (iconAlign === 'left' ? '-ml-1 mr-2' : '-mr-1 ml-2') : '', variant === 'outline' ? 'text-gray-500' : '')}>
                     <Icon type={icon} size='sm' color='inherit' />
                 </div>
             )}
