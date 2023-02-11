@@ -5,7 +5,7 @@ import { Icon } from './Icon'
 
 type LinkColor = 'link' | 'primary' | 'inherit'
 
-type LinkDetail = {
+export type LinkDetail = {
     href: string
     target?: string
     event: any
