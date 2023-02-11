@@ -53,7 +53,7 @@ export const ButtonDropdown: React.FC<ButtonDropdownProps> = ({ align = 'bottom-
             }
             onClick={tooltipClick}
         >
-            <div className='rounded-md bg-white py-1 shadow'>{children}</div>
+            <div className='rounded-md bg-white py-2 shadow'>{children}</div>
         </Tooltip>
     )
 }
