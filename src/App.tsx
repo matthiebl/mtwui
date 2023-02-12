@@ -91,19 +91,20 @@ const App = () => {
                                 onChange={detail => setTooltip(detail.value as TooltipAlign)}
                             />
 
-                            <div className='my-60 flex flex-col items-center gap-48'>
-                                <Tooltip control={checked} align={tooltip} controller={<Button>Tooltip Central</Button>} variant='light' arrowTip>
+                            <div className='my-48 flex flex-col items-center gap-32'>
+                                <Tooltip control='hover' align={tooltip} controller={<Button>Tooltip Central</Button>} variant='light' arrowTip>
                                     <div className='flex flex-col'>
                                         <p>Hello</p>
                                         <p>Cool</p>
                                     </div>
                                 </Tooltip>
+
                                 <ButtonDropdown align={tooltip} buttonText='This is a dropdown'>
                                     <MenuItems
                                         items={[
                                             {
                                                 type: 'link',
-                                                label: 'First option and option and option and option',
+                                                label: 'First option',
                                                 href: '/',
                                                 onClick: detail => detail.event.preventDefault(),
                                             },
@@ -115,6 +116,15 @@ const App = () => {
                                                 label: 'Another link',
                                                 href: '/',
                                                 onClick: detail => detail.event.preventDefault(),
+                                            },
+                                            {
+                                                type: 'expandable',
+                                                icon: 'bell',
+                                                label: 'Optional Expandable Section',
+                                                items: [
+                                                    { type: 'link', label: 'Optional link', href: '#', disabled: true, onClick: detail => detail.event.preventDefault() },
+                                                    { type: 'link', label: 'Optional', href: '#', onClick: detail => detail.event.preventDefault() },
+                                                ],
                                             },
                                             {
                                                 type: 'button',
