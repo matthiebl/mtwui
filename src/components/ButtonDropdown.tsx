@@ -28,7 +28,6 @@ export const ButtonDropdown: React.FC<ButtonDropdownProps> = ({ align = 'bottom-
 
     const tooltipClick: React.MouseEventHandler<HTMLDivElement> = event => {
         event.stopPropagation()
-        setOpen(false)
     }
 
     const buttonClick = (detail: ButtonDetail) => {
