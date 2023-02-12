@@ -114,6 +114,7 @@ const App = () => {
                                             {
                                                 type: 'link',
                                                 label: 'Another link',
+                                                icon: 'warning',
                                                 href: '/',
                                                 onClick: detail => detail.event.preventDefault(),
                                             },
@@ -121,6 +122,8 @@ const App = () => {
                                                 type: 'expandable',
                                                 icon: 'bell',
                                                 label: 'Optional Expandable Section',
+                                                defaultOpen: true,
+                                                disabled: true,
                                                 items: [
                                                     { type: 'link', label: 'Optional link', href: '#', disabled: true, onClick: detail => detail.event.preventDefault() },
                                                     { type: 'link', label: 'Optional', href: '#', onClick: detail => detail.event.preventDefault() },

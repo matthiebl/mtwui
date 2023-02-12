@@ -6,15 +6,6 @@ import { Icon } from './Icon'
 import { Link, LinkDetail } from './Link'
 
 type MenuItemType = 'link' | 'button' | 'expandable' | 'dropdown' | 'divider'
-// type MenuItem = {
-//     type: MenuItemType
-//     icon?: IconType
-//     label?: string
-//     href?: string
-//     target?: string
-//     items?: MenuItem[]
-//     onClick?: (detail: any) => any
-// }
 
 type MenuItem = MenuItemDivider | MenuItemLink | MenuItemButton | MenuItemExpandable
 
@@ -88,7 +79,10 @@ const LinkItem: React.FC<MenuItemLink & { className: string }> = ({ icon, label,
             onClick={_onClick}
             className={classNames(className, 'hover:bg-gray-100 aria-disabled:pointer-events-none aria-disabled:bg-white aria-disabled:text-gray-400')}
         >
-            {label}
+            <span className='flex items-center gap-2'>
+                {icon && <Icon type={icon} size='sm' color='inherit' />}
+                <span>{label}</span>
+            </span>
         </a>
     )
 }
@@ -133,7 +127,7 @@ const ExpandableItem: React.FC<MenuItemExpandable & { className: string }> = ({ 
                     event.stopPropagation()
                     setOpen(!open)
                 }}
-                className={classNames(className, 'flex items-center justify-between gap-10 hover:bg-gray-100')}
+                className={classNames(className, 'flex items-center justify-between gap-10 hover:bg-gray-100 disabled:bg-white disabled:text-gray-400')}
             >
                 <span className='flex items-center gap-2'>
                     {icon && <Icon type={icon} size='sm' color='inherit' />}
@@ -141,7 +135,7 @@ const ExpandableItem: React.FC<MenuItemExpandable & { className: string }> = ({ 
                 </span>
                 <Icon type='chevron-down' size='sm' color='inherit' />
             </button>
-            <div aria-expanded={open} className='hidden flex-col aria-expanded:flex'>
+            <div aria-expanded={disabled ? false : open} className='hidden flex-col aria-expanded:flex'>
                 {items.map(item => (
                     <LinkItem key={crypto.randomUUID()} {...item} className={classNames(className, 'pl-11')} />
                 ))}
