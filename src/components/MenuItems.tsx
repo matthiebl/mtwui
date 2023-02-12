@@ -3,9 +3,7 @@ import { classNames } from '../internal/class-compiler'
 import { IconType } from '../internal/icons'
 import { Button, ButtonColor, ButtonDetail, ButtonVariant } from './Button'
 import { Icon } from './Icon'
-import { Link, LinkDetail } from './Link'
-
-type MenuItemType = 'link' | 'button' | 'expandable' | 'dropdown' | 'divider'
+import { LinkDetail } from './Link'
 
 type MenuItem = MenuItemDivider | MenuItemLink | MenuItemButton | MenuItemExpandable
 
@@ -25,20 +23,17 @@ export const MenuItems: React.FC<MenuItemsProps> = ({ items, variant = 'compact'
             {items.map(item => {
                 const key = crypto.randomUUID()
 
-                if (item.type === 'divider') {
-                    return <div key={key} className='my-2 w-full border-t border-gray-100' />
-                }
-
-                if (item.type === 'link') {
-                    return <LinkItem key={key} {...item} className={variantStyles} />
-                }
-
-                if (item.type === 'button') {
-                    return <ButtonItem key={key} {...item} className={variantStyles} />
-                }
-
-                if (item.type === 'expandable') {
-                    return <ExpandableItem key={key} {...item} className={variantStyles} />
+                switch (item.type) {
+                    case 'divider':
+                        return <div key={key} className='my-2 w-full border-t border-gray-100' />
+                    case 'link':
+                        return <LinkItem key={key} {...item} className={variantStyles} />
+                    case 'button':
+                        return <ButtonItem key={key} {...item} className={variantStyles} />
+                    case 'expandable':
+                        return <ExpandableItem key={key} {...item} className={variantStyles} />
+                    // case 'dropdown':
+                    //     return <DropdownItem key={key} {...item} className={variantStyles} />
                 }
             })}
         </div>
@@ -77,12 +72,13 @@ const LinkItem: React.FC<MenuItemLink & { className: string }> = ({ icon, label,
             href={href}
             target={target}
             onClick={_onClick}
-            className={classNames(className, 'hover:bg-gray-100 aria-disabled:pointer-events-none aria-disabled:bg-white aria-disabled:text-gray-400')}
+            className={classNames(className, 'hover:bg-gray-100 focus:z-50 focus:outline-indigo-500 aria-disabled:pointer-events-none aria-disabled:bg-white aria-disabled:text-gray-400')}
+            tabIndex={disabled ? -1 : undefined}
         >
-            <span className='flex items-center gap-2'>
+            <div className='flex items-center gap-2'>
                 {icon && <Icon type={icon} size='sm' color='inherit' />}
-                <span>{label}</span>
-            </span>
+                <div>{label}</div>
+            </div>
         </a>
     )
 }
@@ -127,12 +123,12 @@ const ExpandableItem: React.FC<MenuItemExpandable & { className: string }> = ({ 
                     event.stopPropagation()
                     setOpen(!open)
                 }}
-                className={classNames(className, 'flex items-center justify-between gap-10 hover:bg-gray-100 disabled:bg-white disabled:text-gray-400')}
+                className={classNames(className, 'flex items-center justify-between gap-10 hover:bg-gray-100 focus:z-50 focus:outline-indigo-500 disabled:bg-white disabled:text-gray-400')}
             >
-                <span className='flex items-center gap-2'>
+                <div className='flex items-center gap-2'>
                     {icon && <Icon type={icon} size='sm' color='inherit' />}
-                    <span>{label}</span>
-                </span>
+                    <div>{label}</div>
+                </div>
                 <Icon type='chevron-down' size='sm' color='inherit' />
             </button>
             <div aria-expanded={disabled ? false : open} className='hidden flex-col aria-expanded:flex'>
@@ -143,3 +139,47 @@ const ExpandableItem: React.FC<MenuItemExpandable & { className: string }> = ({ 
         </>
     )
 }
+
+// type MenuItemDropdown = {
+//     type: 'dropdown'
+//     icon?: IconType
+//     label: string
+//     items: MenuItem[]
+//     disabled?: boolean
+// }
+
+// const DropdownItem: React.FC<MenuItemDropdown & { className: string }> = ({
+//     icon,
+//     label,
+//     items,
+//     disabled = false,
+//     className,
+// }) => {
+//     const [open, setOpen] = React.useState(false)
+
+//     const _onClick = (detail: LinkDetail) => {
+//         detail.event.preventDefault()
+//         setOpen(!open)
+//     }
+
+//     return (
+//         <Tooltip
+//             control={open}
+//             align='right-top'
+//             variant='custom'
+//             controller={
+//                 <LinkItem
+//                     type='link'
+//                     icon={icon}
+//                     label={label}
+//                     href='#'
+//                     disabled={disabled}
+//                     onClick={_onClick}
+//                     className='px-4 py-2'
+//                 />
+//             }
+//         >
+//             <MenuItems items={items} />
+//         </Tooltip>
+//     )
+// }
