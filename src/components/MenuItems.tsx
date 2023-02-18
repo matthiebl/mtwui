@@ -5,7 +5,7 @@ import { Button, ButtonColor, ButtonDetail, ButtonVariant } from './Button'
 import { Icon } from './Icon'
 import { LinkDetail } from './Link'
 
-export type MenuItem = MenuItemDivider | MenuItemLink | MenuItemButton | MenuItemExpandable
+export type MenuItem = MenuItemDivider | MenuItemLink | MenuItemButton | MenuItemExpandable | MenuItemDropdown
 
 type MenuItemsVariant = 'compact' | 'rounded'
 
@@ -32,8 +32,8 @@ export const MenuItems: React.FC<MenuItemsProps> = ({ items, variant = 'compact'
                         return <ButtonItem key={key} {...item} className={variantStyles} />
                     case 'expandable':
                         return <ExpandableItem key={key} {...item} className={variantStyles} />
-                    // case 'dropdown':
-                    //     return <DropdownItem key={key} {...item} className={variantStyles} />
+                    case 'dropdown':
+                        return <DropdownItem key={key} {...item} className={variantStyles} />
                 }
             })}
         </div>
@@ -75,7 +75,7 @@ const LinkItem: React.FC<MenuItemLink & { className: string }> = ({ icon, label,
             className={classNames(className, 'hover:bg-gray-100 focus:z-50 focus:outline-indigo-500 aria-disabled:pointer-events-none aria-disabled:bg-white aria-disabled:text-gray-400')}
             tabIndex={disabled ? -1 : undefined}
         >
-            <div className='flex w-full items-center gap-2'>
+            <div className='flex h-5 w-full items-center gap-2'>
                 {icon && (
                     <div>
                         <Icon type={icon} size='sm' color='inherit' />
@@ -129,7 +129,7 @@ const ExpandableItem: React.FC<MenuItemExpandable & { className: string }> = ({ 
                 }}
                 className={classNames(className, 'hover:bg-gray-100 focus:z-50 focus:outline-indigo-500 disabled:bg-white disabled:text-gray-400')}
             >
-                <div className='flex w-full items-center gap-2'>
+                <div className='flex h-5 w-full items-center gap-2'>
                     {icon && (
                         <div>
                             <Icon type={icon} size='sm' color='inherit' />
@@ -150,46 +150,46 @@ const ExpandableItem: React.FC<MenuItemExpandable & { className: string }> = ({ 
     )
 }
 
-// type MenuItemDropdown = {
-//     type: 'dropdown'
-//     icon?: IconType
-//     label: string
-//     items: MenuItem[]
-//     disabled?: boolean
-// }
+type MenuItemDropdown = {
+    type: 'dropdown'
+    icon?: IconType
+    label: string
+    items: MenuItem[]
+    disabled?: boolean
+}
 
-// const DropdownItem: React.FC<MenuItemDropdown & { className: string }> = ({
-//     icon,
-//     label,
-//     items,
-//     disabled = false,
-//     className,
-// }) => {
-//     const [open, setOpen] = React.useState(false)
+const DropdownItem: React.FC<MenuItemDropdown & { className: string }> = ({ icon, label, items, disabled = false, className }) => {
+    const [open, setOpen] = React.useState(false)
 
-//     const _onClick = (detail: LinkDetail) => {
-//         detail.event.preventDefault()
-//         setOpen(!open)
-//     }
+    const _onClick = (detail: LinkDetail) => {
+        detail.event.preventDefault()
+        setOpen(!open)
+    }
 
-//     return (
-//         <Tooltip
-//             control={open}
-//             align='right-top'
-//             variant='custom'
-//             controller={
-//                 <LinkItem
-//                     type='link'
-//                     icon={icon}
-//                     label={label}
-//                     href='#'
-//                     disabled={disabled}
-//                     onClick={_onClick}
-//                     className='px-4 py-2'
-//                 />
-//             }
-//         >
-//             <MenuItems items={items} />
-//         </Tooltip>
-//     )
-// }
+    return (
+        <div className='group relative flex h-fit w-full items-start'>
+            <button
+                disabled={disabled}
+                className={classNames(className, 'w-full hover:bg-gray-100 focus:z-50 focus:outline-indigo-500 disabled:pointer-events-none disabled:bg-white disabled:text-gray-400')}
+                onClick={() => setOpen(!open)}
+            >
+                <div className='flex h-5 w-full items-center gap-2'>
+                    {icon && (
+                        <div>
+                            <Icon type={icon} size='sm' color='inherit' />
+                        </div>
+                    )}
+                    <div className='flex-grow truncate text-left'>{label}</div>
+                    <div>
+                        <Icon type='chevron-right' size='sm' color='inherit' />
+                    </div>
+                </div>
+            </button>
+            <div aria-hidden={!open} className='absolute left-full z-50 w-max translate-x-2 -translate-y-2 scale-100 transition duration-150 aria-hidden:scale-0'>
+                <div className='rounded-md bg-white py-2 shadow'>
+                    <MenuItems items={items} />
+                </div>
+            </div>
+        </div>
+    )
+}

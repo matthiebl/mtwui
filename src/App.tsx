@@ -235,16 +235,36 @@ const menuItems: MenuItem[] = [
         items: [
             {
                 type: 'link',
-                label: 'Optional link',
+                label: 'Optional link that is too long long long',
                 href: '#',
                 disabled: true,
                 onClick: detail => detail.event.preventDefault(),
             },
             {
                 type: 'link',
-                label: 'Optional',
+                label: 'Optional wwwwww',
                 href: '#',
                 onClick: detail => detail.event.preventDefault(),
+            },
+        ],
+    },
+    {
+        type: 'dropdown',
+        label: 'wow this is really cool',
+        icon: 'users',
+        items: [
+            {
+                type: 'dropdown',
+                label: 'wow this is really cool',
+                icon: 'users',
+                items: [
+                    {
+                        type: 'link',
+                        label: 'First option option option',
+                        href: '/',
+                        onClick: detail => detail.event.preventDefault(),
+                    },
+                ],
             },
         ],
     },
