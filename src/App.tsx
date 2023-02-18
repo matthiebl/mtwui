@@ -213,8 +213,6 @@ const menuItems: MenuItem[] = [
     {
         type: 'link',
         label: 'First option option option',
-        href: '/',
-        onClick: detail => detail.event.preventDefault(),
     },
     {
         type: 'divider',
@@ -272,12 +270,10 @@ const menuItems: MenuItem[] = [
         type: 'button',
         label: 'A button in the dropdown',
         disabled: true,
-        onClick: detail => detail.event.preventDefault(),
     },
     {
         type: 'button',
         label: 'A button in the dropdown',
         color: 'error',
-        onClick: detail => detail.event.preventDefault(),
     },
 ]

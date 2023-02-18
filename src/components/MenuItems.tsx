@@ -48,7 +48,7 @@ type MenuItemLink = {
     type: 'link'
     icon?: IconType
     label: string
-    href: string
+    href?: string
     target?: string
     disabled?: boolean
     onClick?: (detail: LinkDetail) => any
@@ -58,32 +58,65 @@ const LinkItem: React.FC<MenuItemLink & { className: string }> = ({ icon, label,
     const _onClick: React.MouseEventHandler<HTMLAnchorElement> = event => {
         if (onClick) {
             onClick({
-                href,
+                href: href || '',
                 target,
                 event,
             })
         }
     }
 
+    const Content = (
+        <div className='flex h-5 w-full items-center gap-2'>
+            {icon && (
+                <div>
+                    <Icon type={icon} size='sm' color='inherit' />
+                </div>
+            )}
+            <div className='flex-grow truncate text-left'>{label}</div>
+        </div>
+    )
+
+    if (href) {
+        return (
+            <a
+                role='button'
+                aria-disabled={disabled}
+                href={href}
+                target={target}
+                onClick={event => {
+                    if (onClick) {
+                        onClick({
+                            href: href || '',
+                            target,
+                            event,
+                        })
+                    }
+                }}
+                className={classNames(className, 'hover:bg-gray-100 focus:z-50 focus:outline-indigo-500 aria-disabled:pointer-events-none aria-disabled:bg-white aria-disabled:text-gray-400')}
+                tabIndex={disabled ? -1 : undefined}
+            >
+                {Content}
+            </a>
+        )
+    }
+
     return (
-        <a
-            role='button'
-            aria-disabled={disabled}
-            href={href}
-            target={target}
-            onClick={_onClick}
-            className={classNames(className, 'hover:bg-gray-100 focus:z-50 focus:outline-indigo-500 aria-disabled:pointer-events-none aria-disabled:bg-white aria-disabled:text-gray-400')}
+        <button
+            disabled={disabled}
+            onClick={event => {
+                if (onClick) {
+                    onClick({
+                        href: href || '',
+                        target,
+                        event,
+                    })
+                }
+            }}
+            className={classNames(className, 'hover:bg-gray-100 focus:z-50 focus:outline-indigo-500 disabled:bg-white disabled:text-gray-400')}
             tabIndex={disabled ? -1 : undefined}
         >
-            <div className='flex h-5 w-full items-center gap-2'>
-                {icon && (
-                    <div>
-                        <Icon type={icon} size='sm' color='inherit' />
-                    </div>
-                )}
-                <div className='flex-grow truncate text-left'>{label}</div>
-            </div>
-        </a>
+            {Content}
+        </button>
     )
 }
 
@@ -170,7 +203,7 @@ const DropdownItem: React.FC<MenuItemDropdown & { className: string }> = ({ icon
         <div className='group relative flex h-fit w-full items-start'>
             <button
                 disabled={disabled}
-                className={classNames(className, 'w-full hover:bg-gray-100 focus:z-50 focus:outline-indigo-500 disabled:pointer-events-none disabled:bg-white disabled:text-gray-400')}
+                className={classNames(className, 'w-full hover:bg-gray-100 focus:z-50 focus:outline-indigo-500 disabled:bg-white disabled:text-gray-400')}
                 onClick={() => setOpen(!open)}
             >
                 <div className='flex h-5 w-full items-center gap-2'>
@@ -185,7 +218,7 @@ const DropdownItem: React.FC<MenuItemDropdown & { className: string }> = ({ icon
                     </div>
                 </div>
             </button>
-            <div aria-hidden={!open} className='absolute left-full z-50 w-max translate-x-2 -translate-y-2 scale-100 transition duration-150 aria-hidden:scale-0'>
+            <div aria-hidden={!open} className='absolute left-full z-50 w-max translate-x-2 -translate-y-2 aria-hidden:hidden'>
                 <div className='rounded-md bg-white py-2 shadow'>
                     <MenuItems items={items} />
                 </div>
