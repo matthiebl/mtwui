@@ -7,17 +7,12 @@ import { LinkDetail } from './Link'
 
 export type MenuItem = MenuItemDivider | MenuItemLink | MenuItemButton | MenuItemExpandable | MenuItemDropdown
 
-type MenuItemsVariant = 'compact' | 'rounded'
-
 export interface MenuItemsProps {
     // Properties
     items: MenuItem[]
-    variant?: MenuItemsVariant
 }
 
-export const MenuItems: React.FC<MenuItemsProps> = ({ items, variant = 'compact' }) => {
-    const variantStyles = variant === 'compact' ? 'py-2 px-4' : ''
-
+export const MenuItems: React.FC<MenuItemsProps> = ({ items }) => {
     return (
         <div className='flex flex-col text-sm text-gray-900'>
             {items.map(item => {
@@ -27,13 +22,13 @@ export const MenuItems: React.FC<MenuItemsProps> = ({ items, variant = 'compact'
                     case 'divider':
                         return <div key={key} className='my-2 w-full border-t border-gray-100' />
                     case 'link':
-                        return <LinkItem key={key} {...item} className={variantStyles} />
+                        return <LinkItem key={key} {...item} />
                     case 'button':
-                        return <ButtonItem key={key} {...item} className={variantStyles} />
+                        return <ButtonItem key={key} {...item} />
                     case 'expandable':
-                        return <ExpandableItem key={key} {...item} className={variantStyles} />
+                        return <ExpandableItem key={key} {...item} />
                     case 'dropdown':
-                        return <DropdownItem key={key} {...item} className={variantStyles} />
+                        return <DropdownItem key={key} {...item} />
                 }
             })}
         </div>
@@ -54,7 +49,7 @@ type MenuItemLink = {
     onClick?: (detail: LinkDetail) => any
 }
 
-const LinkItem: React.FC<MenuItemLink & { className: string }> = ({ icon, label, href, target, disabled = false, onClick, className }) => {
+const LinkItem: React.FC<MenuItemLink & { className?: string }> = ({ icon, label, href, target, disabled = false, onClick, className = '' }) => {
     const _onClick: React.MouseEventHandler<HTMLAnchorElement> = event => {
         if (onClick) {
             onClick({
@@ -92,7 +87,10 @@ const LinkItem: React.FC<MenuItemLink & { className: string }> = ({ icon, label,
                         })
                     }
                 }}
-                className={classNames(className, 'hover:bg-gray-100 focus:z-50 focus:outline-indigo-500 aria-disabled:pointer-events-none aria-disabled:bg-white aria-disabled:text-gray-400')}
+                className={classNames(
+                    className,
+                    'py-2 px-4 hover:bg-gray-100 focus:z-50 focus:outline-indigo-500 aria-disabled:pointer-events-none aria-disabled:bg-white aria-disabled:text-gray-400',
+                )}
                 tabIndex={disabled ? -1 : undefined}
             >
                 {Content}
@@ -112,7 +110,7 @@ const LinkItem: React.FC<MenuItemLink & { className: string }> = ({ icon, label,
                     })
                 }
             }}
-            className={classNames(className, 'hover:bg-gray-100 focus:z-50 focus:outline-indigo-500 disabled:bg-white disabled:text-gray-400')}
+            className={classNames(className, 'py-2 px-4 hover:bg-gray-100 focus:z-50 focus:outline-indigo-500 disabled:bg-white disabled:text-gray-400')}
             tabIndex={disabled ? -1 : undefined}
         >
             {Content}
@@ -130,9 +128,9 @@ type MenuItemButton = {
     onClick?: (detail: ButtonDetail) => any
 }
 
-const ButtonItem: React.FC<MenuItemButton & { className: string }> = ({ icon, label, color, variant, disabled = false, onClick, className }) => {
+const ButtonItem: React.FC<MenuItemButton> = ({ icon, label, color, variant, disabled = false, onClick }) => {
     return (
-        <div className={className}>
+        <div className='py-2 px-4'>
             <Button color={color} variant={variant} icon={icon} disabled={disabled} onClick={onClick} fullWidth>
                 {label}
             </Button>
@@ -149,7 +147,7 @@ type MenuItemExpandable = {
     defaultOpen?: boolean
 }
 
-const ExpandableItem: React.FC<MenuItemExpandable & { className: string }> = ({ icon, label, items, disabled = false, defaultOpen = false, className }) => {
+const ExpandableItem: React.FC<MenuItemExpandable> = ({ icon, label, items, disabled = false, defaultOpen = false }) => {
     const [open, setOpen] = React.useState(defaultOpen)
 
     return (
@@ -160,7 +158,7 @@ const ExpandableItem: React.FC<MenuItemExpandable & { className: string }> = ({ 
                     event.stopPropagation()
                     setOpen(!open)
                 }}
-                className={classNames(className, 'hover:bg-gray-100 focus:z-50 focus:outline-indigo-500 disabled:bg-white disabled:text-gray-400')}
+                className='py-2 px-4 hover:bg-gray-100 focus:z-50 focus:outline-indigo-500 disabled:bg-white disabled:text-gray-400'
             >
                 <div className='flex h-5 w-full items-center gap-2'>
                     {icon && (
@@ -176,7 +174,7 @@ const ExpandableItem: React.FC<MenuItemExpandable & { className: string }> = ({ 
             </button>
             <div aria-expanded={disabled ? false : open} className='hidden flex-col aria-expanded:flex'>
                 {items.map(item => (
-                    <LinkItem key={crypto.randomUUID()} {...item} className={classNames(className, 'pl-11')} />
+                    <LinkItem key={crypto.randomUUID()} {...item} className='pl-11' />
                 ))}
             </div>
         </>
@@ -191,7 +189,7 @@ type MenuItemDropdown = {
     disabled?: boolean
 }
 
-const DropdownItem: React.FC<MenuItemDropdown & { className: string }> = ({ icon, label, items, disabled = false, className }) => {
+const DropdownItem: React.FC<MenuItemDropdown> = ({ icon, label, items, disabled = false }) => {
     const [open, setOpen] = React.useState(false)
 
     const _onClick = (detail: LinkDetail) => {
@@ -201,11 +199,7 @@ const DropdownItem: React.FC<MenuItemDropdown & { className: string }> = ({ icon
 
     return (
         <div className='group relative flex h-fit w-full items-start'>
-            <button
-                disabled={disabled}
-                className={classNames(className, 'w-full hover:bg-gray-100 focus:z-50 focus:outline-indigo-500 disabled:bg-white disabled:text-gray-400')}
-                onClick={() => setOpen(!open)}
-            >
+            <button disabled={disabled} className='w-full py-2 px-4 hover:bg-gray-100 focus:z-50 focus:outline-indigo-500 disabled:bg-white disabled:text-gray-400' onClick={() => setOpen(!open)}>
                 <div className='flex h-5 w-full items-center gap-2'>
                     {icon && (
                         <div>

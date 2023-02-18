@@ -104,12 +104,12 @@ const App = () => {
                                 </ButtonDropdown>
                             </div>
 
-                            <div className='w-40 border border-gray-300'>
+                            <div className='w-60 border border-gray-300'>
                                 <MenuItems items={menuItems} />
                             </div>
 
                             <IconShowcase />
-                            <Box margin={{ b: 'xs' }}></Box>
+                            <Box margin={{ b: 'lg' }}></Box>
                             <Box variant='sub'>Subscript text</Box>
                         </>
                     }
