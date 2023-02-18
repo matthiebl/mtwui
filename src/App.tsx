@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Box, Button, ButtonDropdown, Checkbox, Icon, Input, Link, RadioGroup, Switch, Textarea, Tooltip, TooltipAlign } from './components'
+import { Box, Button, ButtonDropdown, Checkbox, Icon, Input, Link, MenuItem, MenuItems, RadioGroup, Switch, Textarea, Tooltip, TooltipAlign } from './components'
 import { IconType } from './internal/icons'
 
 const App = () => {
@@ -91,20 +91,25 @@ const App = () => {
                                 onChange={detail => setTooltip(detail.value as TooltipAlign)}
                             />
 
-                            <div className='my-60 flex flex-col items-center gap-48'>
-                                <Tooltip control={checked} align={tooltip} controller={<Button>Tooltip Central</Button>} variant='light' arrowTip>
+                            <div className='my-48 flex flex-col items-center gap-32'>
+                                <Tooltip control='hover' align={tooltip} controller={<Button>Tooltip Central</Button>} variant='light' arrowTip>
                                     <div className='flex flex-col'>
                                         <p>Hello</p>
                                         <p>Cool</p>
                                     </div>
                                 </Tooltip>
+
                                 <ButtonDropdown align={tooltip} buttonText='This is a dropdown'>
-                                    Hello
+                                    <MenuItems items={menuItems} />
                                 </ButtonDropdown>
                             </div>
 
+                            <div className='w-60 border border-gray-300'>
+                                <MenuItems items={menuItems} />
+                            </div>
+
                             <IconShowcase />
-                            <Box margin={{ b: 'xs' }}></Box>
+                            <Box margin={{ b: 'lg' }}></Box>
                             <Box variant='sub'>Subscript text</Box>
                         </>
                     }
@@ -203,3 +208,72 @@ const IconShowcase = () => {
         </Box>
     )
 }
+
+const menuItems: MenuItem[] = [
+    {
+        type: 'link',
+        label: 'First option option option',
+    },
+    {
+        type: 'divider',
+    },
+    {
+        type: 'link',
+        label: 'Another option ooptions',
+        icon: 'warning',
+        href: '/',
+        onClick: detail => detail.event.preventDefault(),
+    },
+    {
+        type: 'expandable',
+        icon: 'bell',
+        label: 'Expand is oversized',
+        defaultOpen: true,
+        disabled: false,
+        items: [
+            {
+                type: 'link',
+                label: 'Optional link that is too long long long',
+                href: '#',
+                disabled: true,
+                onClick: detail => detail.event.preventDefault(),
+            },
+            {
+                type: 'link',
+                label: 'Optional wwwwww',
+                href: '#',
+                onClick: detail => detail.event.preventDefault(),
+            },
+        ],
+    },
+    {
+        type: 'dropdown',
+        label: 'wow this is really cool',
+        icon: 'users',
+        items: [
+            {
+                type: 'dropdown',
+                label: 'wow this is really cool',
+                icon: 'users',
+                items: [
+                    {
+                        type: 'link',
+                        label: 'First option option option',
+                        href: '/',
+                        onClick: detail => detail.event.preventDefault(),
+                    },
+                ],
+            },
+        ],
+    },
+    {
+        type: 'button',
+        label: 'A button in the dropdown',
+        disabled: true,
+    },
+    {
+        type: 'button',
+        label: 'A button in the dropdown',
+        color: 'error',
+    },
+]
