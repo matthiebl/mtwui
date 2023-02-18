@@ -5,7 +5,7 @@ import { Button, ButtonColor, ButtonDetail, ButtonVariant } from './Button'
 import { Icon } from './Icon'
 import { LinkDetail } from './Link'
 
-type MenuItem = MenuItemDivider | MenuItemLink | MenuItemButton | MenuItemExpandable
+export type MenuItem = MenuItemDivider | MenuItemLink | MenuItemButton | MenuItemExpandable
 
 type MenuItemsVariant = 'compact' | 'rounded'
 
@@ -75,9 +75,13 @@ const LinkItem: React.FC<MenuItemLink & { className: string }> = ({ icon, label,
             className={classNames(className, 'hover:bg-gray-100 focus:z-50 focus:outline-indigo-500 aria-disabled:pointer-events-none aria-disabled:bg-white aria-disabled:text-gray-400')}
             tabIndex={disabled ? -1 : undefined}
         >
-            <div className='flex items-center gap-2'>
-                {icon && <Icon type={icon} size='sm' color='inherit' />}
-                <div>{label}</div>
+            <div className='flex w-full items-center gap-2'>
+                {icon && (
+                    <div>
+                        <Icon type={icon} size='sm' color='inherit' />
+                    </div>
+                )}
+                <div className='flex-grow truncate text-left'>{label}</div>
             </div>
         </a>
     )
@@ -123,13 +127,19 @@ const ExpandableItem: React.FC<MenuItemExpandable & { className: string }> = ({ 
                     event.stopPropagation()
                     setOpen(!open)
                 }}
-                className={classNames(className, 'flex items-center justify-between gap-10 hover:bg-gray-100 focus:z-50 focus:outline-indigo-500 disabled:bg-white disabled:text-gray-400')}
+                className={classNames(className, 'hover:bg-gray-100 focus:z-50 focus:outline-indigo-500 disabled:bg-white disabled:text-gray-400')}
             >
-                <div className='flex items-center gap-2'>
-                    {icon && <Icon type={icon} size='sm' color='inherit' />}
-                    <div>{label}</div>
+                <div className='flex w-full items-center gap-2'>
+                    {icon && (
+                        <div>
+                            <Icon type={icon} size='sm' color='inherit' />
+                        </div>
+                    )}
+                    <div className='flex-grow truncate text-left'>{label}</div>
+                    <div>
+                        <Icon type='chevron-down' size='sm' color='inherit' />
+                    </div>
                 </div>
-                <Icon type='chevron-down' size='sm' color='inherit' />
             </button>
             <div aria-expanded={disabled ? false : open} className='hidden flex-col aria-expanded:flex'>
                 {items.map(item => (
