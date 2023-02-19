@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Box, Button, ButtonDropdown, Checkbox, Icon, Input, Link, MenuItem, MenuItems, RadioGroup, Switch, Textarea, Tooltip, TooltipAlign } from './components'
+import { Box, Button, ButtonDropdown, Checkbox, Icon, Input, Link, MenuItem, MenuItems, RadioGroup, Sidebar, Switch, Textarea, Tooltip, TooltipAlign } from './components'
 import { IconType } from './internal/icons'
 
 const App = () => {
@@ -16,102 +16,28 @@ const App = () => {
                 <Route
                     path='/'
                     element={
-                        <>
-                            <Box variant='h1'>Heading 1</Box>
-                            <Box variant='h2'>Heading 2</Box>
-                            <Box variant='h3'>Heading 3</Box>
-                            <Box variant='h4'>Heading 4</Box>
-                            <Box variant='h5'>Heading 5</Box>
-                            <Box variant='p'>
-                                <Icon type='warning' /> Normal text <Icon type='edit' />
-                            </Box>
-                            <Box>
-                                <Button>Hello</Button>
-                                <Button variant='outline' icon='edit' disabled>
-                                    Hello
-                                </Button>
-                                <Button color='error' icon='warning' disabled fullWidth onClick={() => console.log('hello')}>
-                                    Hello
-                                </Button>
-                                <Button color='success'>Hello</Button>
-                                <Button color='warning' icon='warning' disabled />
-                                <Button variant='outline' color='primary'>
-                                    This is an outlined button
-                                </Button>
-                                <Button variant='outline' icon='close'></Button>
-                            </Box>
-                            <Box variant='p'>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis aliquam ullam, perferendis id commodi alias minima rerum repellendus perspiciatis veritatis ea quo
-                                maiores unde, eius labore quia doloribus quod praesentium facere numquam voluptates temporibus. Officiis, provident corporis! Rerum pariatur ad, eos sit mollitia id
-                                ipsam nostrum ex minima modi rem reiciendis consectetur! Nihil id, blanditiis vitae ratione ipsam, culpa qui tempore molestias hic ipsum amet iusto voluptates
-                                voluptatum modi nostrum facere{' '}
-                                <Link href='#' icon='adjustments' color='link' disabled>
-                                    External
-                                </Link>{' '}
-                                repudiandae eligendi, debitis placeat. Iste nesciunt nobis, incidunt praesentium expedita aliquam omnis. Voluptatibus doloribus error quisquam fugiat corporis
-                                repudiandae architecto autem vero vitae dolores, aperiam nulla accusamus eveniet iste, placeat non illum? Excepturi similique culpa natus corrupti praesentium sit. Quia
-                                velit quod tempore nesciunt{' '}
-                                <Link variant='internal' href='#' icon='adjustments' color='primary'>
-                                    Inernal Link
-                                </Link>{' '}
-                                nam enim ab in. Accusamus quas repellendus numquam nostrum, quod deserunt iste. Aut, animi eveniet fugiat saepe eius tempore dolorem a laboriosam quo, nam, inventore
-                                vero magnam recusandae! Quidem laudantium nisi veritatis, blanditiis cumque officia animi quae commodi minus, molestias dolor voluptates eaque adipisci eos earum
-                                placeat accusantium maiores provident nulla enim. Rerum sequi debitis impedit. Perferendis accusantium ea vel corrupti saepe itaque. Placeat voluptatem quisquam culpa
-                                ratione alias perspiciatis excepturi, nesciunt voluptas ad nulla repellendus minus quas quaerat soluta. Commodi facilis nulla alias ullam!
-                            </Box>
-                            <Input type='number' value={v1} placeholder='Email address' onChange={detail => setV1(detail.value)} />
-
-                            <Textarea value={''} placeholder={'This is placeholder \ntext'} rows={10} />
-
-                            <Checkbox checked={checked} onChange={detail => setChecked(detail.checked)} label='Remember me?' />
-                            <Checkbox disabled checked={checked} onChange={detail => setChecked(detail.checked)} label='Remember me?' />
-
-                            <Switch disabled={checked} checked={switched} onChange={detail => setSwitched(detail.checked)} label='Private' />
-
-                            <Button icon='ellipsis-vertical' iconAlign='right'>
-                                Button dropdown
-                            </Button>
-
-                            <RadioGroup
-                                value={tooltip}
-                                items={[
-                                    { value: 'top-left', label: 'Top left' },
-                                    { value: 'top', label: 'Top' },
-                                    { value: 'top-right', label: 'Top right' },
-                                    { value: 'right-top', label: 'Right top' },
-                                    { value: 'right', label: 'Right' },
-                                    { value: 'right-bottom', label: 'Right bottom' },
-                                    { value: 'bottom-left', label: 'Bottom left' },
-                                    { value: 'bottom', label: 'Bottom' },
-                                    { value: 'bottom-right', label: 'Bottom right' },
-                                    { value: 'left-top', label: 'Left top' },
-                                    { value: 'left', label: 'Left' },
-                                    { value: 'left-bottom', label: 'Left bottom' },
-                                ]}
-                                onChange={detail => setTooltip(detail.value as TooltipAlign)}
-                            />
-
-                            <div className='my-48 flex flex-col items-center gap-32'>
-                                <Tooltip control='hover' align={tooltip} controller={<Button>Tooltip Central</Button>} variant='light' arrowTip>
-                                    <div className='flex flex-col'>
-                                        <p>Hello</p>
-                                        <p>Cool</p>
-                                    </div>
-                                </Tooltip>
-
-                                <ButtonDropdown align={tooltip} buttonText='This is a dropdown'>
+                        <div className='flex h-screen w-screen overflow-hidden'>
+                            <div className='sticky top-0 h-full'>
+                                <Sidebar title='Hello there'>
                                     <MenuItems items={menuItems} />
-                                </ButtonDropdown>
+                                </Sidebar>
                             </div>
 
-                            <div className='w-60 border border-gray-300'>
-                                <MenuItems items={menuItems} />
-                            </div>
+                            <div className='flex flex-col'>
+                                <div className='sticky top-0'>
+                                    <div className='flex h-16 w-full bg-red-50'>Hello there</div>
+                                </div>
 
-                            <IconShowcase />
-                            <Box margin={{ b: 'lg' }}></Box>
-                            <Box variant='sub'>Subscript text</Box>
-                        </>
+                                <div className='w-full'>
+                                    <IconShowcase />
+                                    <Box margin={{ b: '3xl' }}>
+                                        Hello there long long long long long long long long long long long long long long long long long long long long long long long long long long long long long
+                                        long long long long long long long long long long long long long
+                                    </Box>
+                                    <Box variant='sub'>Subscript text</Box>
+                                </div>
+                            </div>
+                        </div>
                     }
                 />
             </Routes>
@@ -215,7 +141,15 @@ const menuItems: MenuItem[] = [
         label: 'First option option option',
     },
     {
+        type: 'link',
+        label: 'First option option option',
+    },
+    {
         type: 'divider',
+    },
+    {
+        type: 'link',
+        label: 'First option option option',
     },
     {
         type: 'link',
@@ -223,6 +157,18 @@ const menuItems: MenuItem[] = [
         icon: 'warning',
         href: '/',
         onClick: detail => detail.event.preventDefault(),
+    },
+    {
+        type: 'link',
+        label: 'First option option option',
+    },
+    {
+        type: 'link',
+        label: 'First option option option',
+    },
+    {
+        type: 'link',
+        label: 'First option option option',
     },
     {
         type: 'expandable',
@@ -247,26 +193,6 @@ const menuItems: MenuItem[] = [
         ],
     },
     {
-        type: 'dropdown',
-        label: 'wow this is really cool',
-        icon: 'users',
-        items: [
-            {
-                type: 'dropdown',
-                label: 'wow this is really cool',
-                icon: 'users',
-                items: [
-                    {
-                        type: 'link',
-                        label: 'First option option option',
-                        href: '/',
-                        onClick: detail => detail.event.preventDefault(),
-                    },
-                ],
-            },
-        ],
-    },
-    {
         type: 'button',
         label: 'A button in the dropdown',
         disabled: true,
@@ -275,5 +201,9 @@ const menuItems: MenuItem[] = [
         type: 'button',
         label: 'A button in the dropdown',
         color: 'error',
+    },
+    {
+        type: 'link',
+        label: 'First option option option',
     },
 ]
