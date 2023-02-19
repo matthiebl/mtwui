@@ -5,7 +5,7 @@ import { Button, ButtonColor, ButtonDetail, ButtonVariant } from './Button'
 import { Icon } from './Icon'
 import { LinkDetail } from './Link'
 
-export type MenuItem = MenuItemDivider | MenuItemLink | MenuItemButton | MenuItemExpandable | MenuItemDropdown
+export type MenuItem = MenuItemDivider | MenuItemLink | MenuItemButton | MenuItemExpandable /*| MenuItemDropdown*/
 
 export interface MenuItemsProps {
     // Properties
@@ -27,8 +27,8 @@ export const MenuItems: React.FC<MenuItemsProps> = ({ items }) => {
                         return <ButtonItem key={key} {...item} />
                     case 'expandable':
                         return <ExpandableItem key={key} {...item} />
-                    case 'dropdown':
-                        return <DropdownItem key={key} {...item} />
+                    // case 'dropdown':
+                    //     return <DropdownItem key={key} {...item} />
                 }
             })}
         </div>
