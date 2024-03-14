@@ -1,6 +1,6 @@
 {
-  "name": "@matthiebl/npm-tailwind-template",
-  "version": "0.1.5",
+  "name": "@matthiebl/mtwui",
+  "version": "1.1.0",
   "description": "A template npm module with react + typescript + tailwindcss",
   "license": "MIT",
   "author": "Matthew Hiebl",
@@ -10,19 +10,19 @@
     "typescript",
     "tailwindcss"
   ],
-  "homepage": "https://github.com/matthiebl/npm-tailwind-template",
+  "homepage": "https://github.com/matthiebl/mtwui",
   "bugs": {
-    "url": "https://github.com/matthiebl/npm-tailwind-template/issues"
+    "url": "https://github.com/matthiebl/mtwui/issues"
   },
   "files": [
     "dist"
   ],
   "main": "dist/index.js",
-  "module": "dist/testlib.esm.js",
+  "module": "dist/mtwui.esm.js",
   "typings": "dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/matthiebl/npm-tailwind-template.git"
+    "url": "https://github.com/matthiebl/mtwui.git"
   },
   "engines": {
     "node": ">=10"
@@ -44,11 +44,11 @@
   },
   "size-limit": [
     {
-      "path": "dist/testlib.cjs.production.min.js",
+      "path": "dist/mtwui.cjs.production.min.js",
       "limit": "10 KB"
     },
     {
-      "path": "dist/testlib.esm.js",
+      "path": "dist/mtwui.esm.js",
       "limit": "10 KB"
     }
   ],
