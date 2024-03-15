@@ -1,15 +1,23 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
+import { twMerge } from 'tailwind-merge'
+import { ButtonEvent } from '../../types/events'
+import { styles } from './styles'
 
-type ButtonVariant = 'primary' | 'secondary' | 'text'
-type ButtonSize = 'small' | 'medium' | 'large'
+export type ButtonVariant = 'primary' | 'secondary' | 'text'
+export type ButtonSize = 'small' | 'medium' | 'large'
+export type ButtonType = 'button' | 'submit'
 
 export interface ButtonProps {
+  // Props
+
   /**
    * The size of the button
+   * @default "medium"
    */
   size?: ButtonSize
   /**
    * Controlls the variant of the button, and its primary styling
+   * @default "primary"
    */
   variant?: ButtonVariant
   /**
@@ -18,16 +26,33 @@ export interface ButtonProps {
   href?: string
   /**
    * This determines whether to use target as `"_blank"` for the anchor tag when href is present
+   * @default false
    */
   external?: boolean
   /**
-   * Button contents. Only text values are allowed
+   * Determines the button type for accessiblity and forms. Use `"submit"` for form submission buttons
+   * @default "button"
    */
-  children: string
+  type?: ButtonType
+  /**
+   * Determines if the button is disabled from being clicked
+   * @default false
+   */
+  disabled?: boolean
+
+  // Slots
+
+  /**
+   * Button contents
+   */
+  children: ReactNode
+
+  // Events
+
   /**
    * Optional click handler for the button
    */
-  onClick?: () => void
+  onClick?: ButtonEvent
 }
 
 /**
@@ -38,36 +63,30 @@ export const Button = ({
   variant = 'primary',
   href,
   external = false,
+  type = 'button',
+  disabled = false,
   children,
-  onClick,
+  onClick = () => {},
 }: ButtonProps) => {
+  // onClick handler
+  const onClickWrapper = () => onClick({})
+
   // styles
-  const classSize = (() => {
-    switch (size) {
-      case 'small':
-        return 'rounded px-2.5 py-1'
-      case 'large':
-        return 'rounded-md px-5 py-2.5'
-      default:
-        return 'rounded-md px-3.5 py-2'
-    }
-  })()
-  const classVariant = (() => {
-    switch (variant) {
-      case 'secondary':
-        return `bg-white ${classSize} text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 dark:text-white dark:bg-white/10 dark:hover:bg-white/20 dark:ring-0`
-      case 'text':
-        return 'text-indigo-600 hover:text-indigo-500 hover:underline dark:text-indigo-500 dark:hover:text-indigo-400'
-      default:
-        return `bg-indigo-600 ${classSize} text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 dark:bg-indigo-500 dark:hover:bg-indigo-400`
-    }
-  })()
-  const className = `${classVariant} focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:focus-visible:outline-indigo-500`
+  const className = twMerge(
+    styles.base,
+    styles.variant[variant],
+    variant === 'text' ? '' : styles.size[size],
+  )
 
   // anchor tag
   if (href) {
     return (
-      <a className={className} href={href} target={external ? '_blank' : undefined}>
+      <a
+        className={className}
+        href={href}
+        target={external ? '_blank' : undefined}
+        onClick={disabled ? undefined : onClickWrapper}
+      >
         {children}
       </a>
     )
@@ -75,7 +94,13 @@ export const Button = ({
 
   // button
   return (
-    <button type='button' className={className} onClick={onClick}>
+    <button
+      type={type}
+      aria-disabled={disabled}
+      className={className}
+      onClick={disabled ? undefined : onClickWrapper}
+      disabled={disabled}
+    >
       {children}
     </button>
   )
