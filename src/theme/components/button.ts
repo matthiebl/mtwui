@@ -7,7 +7,7 @@ import {
   variant,
 } from '../../types/components/button'
 
-type VariantStyle = {
+type VariantTheme = {
   text: string
   background: string
   other: string
@@ -24,17 +24,17 @@ export interface ButtonTheme {
   }
   styles: {
     base: string
-    fullWidth: string
     sizes: {
       sm: string
       md: string
       lg: string
     }
     variants: {
-      primary: VariantStyle
-      secondary: VariantStyle
-      text: VariantStyle
+      primary: VariantTheme
+      secondary: VariantTheme
+      text: VariantTheme
     }
+    fullWidth: string
   }
 }
 
@@ -49,7 +49,6 @@ const button: ButtonTheme = {
   },
   styles: {
     base: 'block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:focus-visible:outline-indigo-500',
-    fullWidth: 'w-full',
     sizes: {
       sm: 'rounded px-2.5 py-1',
       md: 'rounded-md px-3.5 py-2',
@@ -74,6 +73,7 @@ const button: ButtonTheme = {
         other: '',
       },
     },
+    fullWidth: 'w-full',
   },
 }
 

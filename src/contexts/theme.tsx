@@ -1,12 +1,12 @@
 import React, { ReactNode, createContext, useContext } from 'react'
 import merge from 'deepmerge'
-import theme, { Theme } from '../theme'
+import theme, { ConfigurableTheme, Theme } from '../theme'
 
 const ThemeContext = createContext<Theme>(theme)
 ThemeContext.displayName = 'MTWUIThemeProvider'
 
 interface ThemeProviderProps {
-  value?: Partial<Theme>
+  value?: ConfigurableTheme
   children: ReactNode
 }
 

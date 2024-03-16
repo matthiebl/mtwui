@@ -1,10 +1,12 @@
+import { DeepPartial } from 'tsdef'
 import button, { ButtonTheme } from './components/button'
 
 export interface Theme {
   button: ButtonTheme
 }
+export type ConfigurableTheme = DeepPartial<Theme>
 
-const theme = {
+const theme: Theme = {
   button,
 }
 

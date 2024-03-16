@@ -54,7 +54,8 @@
   ],
   "dependencies": {
     "deepmerge": "^4.3.1",
-    "tailwind-merge": "^2.2.1"
+    "tailwind-merge": "^2.2.1",
+    "tsdef": "^0.0.14"
   },
   "peerDependencies": {
     "react": ">=16"
