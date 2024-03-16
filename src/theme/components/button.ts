@@ -49,7 +49,7 @@ const button: ButtonTheme = {
   },
   styles: {
     base: 'block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:focus-visible:outline-indigo-500',
-    fullWidth: '',
+    fullWidth: 'w-full',
     sizes: {
       sm: 'rounded px-2.5 py-1',
       md: 'rounded-md px-3.5 py-2',
