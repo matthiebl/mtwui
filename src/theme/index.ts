@@ -1,4 +1,4 @@
-import { DeepPartial } from 'tsdef'
+import { DeepPartial } from '../types/base'
 import button, { ButtonTheme } from './components/button'
 
 export interface Theme {
