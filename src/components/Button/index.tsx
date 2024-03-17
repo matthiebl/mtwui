@@ -1,44 +1,48 @@
 import React, { ReactNode } from 'react'
 import { twMerge } from 'tailwind-merge'
-import { ButtonEvent } from '../../types/events'
-import { styles } from './styles'
-
-export type ButtonVariant = 'primary' | 'secondary' | 'text'
-export type ButtonSize = 'small' | 'medium' | 'large'
-export type ButtonType = 'button' | 'submit'
+import { ButtonEvent } from '../../types/base/events'
+import {
+  buttonProps,
+  className,
+  disabled,
+  fullWidth,
+  size,
+  variant,
+} from '../../types/components/button'
+import { useTheme } from '../../contexts/theme'
+import classes from '../../utils/classes'
 
 export interface ButtonProps {
   // Props
 
   /**
    * The size of the button
-   * @default "medium"
+   * @default "md"
    */
-  size?: ButtonSize
+  size?: size
   /**
-   * Controlls the variant of the button, and its primary styling
+   * Controls the primary styling
    * @default "primary"
    */
-  variant?: ButtonVariant
+  variant?: variant
   /**
-   * Used to determine if the root component is an anchor tag
-   */
-  href?: string
-  /**
-   * This determines whether to use target as `"_blank"` for the anchor tag when href is present
+   * Determines if a button takes up the full available width
    * @default false
    */
-  external?: boolean
-  /**
-   * Determines the button type for accessiblity and forms. Use `"submit"` for form submission buttons
-   * @default "button"
-   */
-  type?: ButtonType
+  fullWidth?: fullWidth
   /**
    * Determines if the button is disabled from being clicked
    * @default false
    */
-  disabled?: boolean
+  disabled?: disabled
+  /**
+   * Provide additional classNames
+   */
+  className?: className
+  /**
+   * Provide additional props directly to the button base element
+   */
+  buttonProps?: buttonProps
 
   // Slots
 
@@ -59,48 +63,40 @@ export interface ButtonProps {
  * A basic button component for use across a webpage
  */
 export const Button = ({
-  size = 'medium',
-  variant = 'primary',
-  href,
-  external = false,
-  type = 'button',
-  disabled = false,
+  size,
+  variant,
+  fullWidth,
+  disabled,
+  className,
+  buttonProps,
   children,
-  onClick = () => {},
+  onClick,
 }: ButtonProps) => {
-  // onClick handler
-  const onClickWrapper = () => onClick({})
+  // setup
+  const { button } = useTheme()
+  const { defaultProps, styles } = button
+  const { base, sizes, variants, fullWidth: fullWidthStyles } = styles
+
+  // defaults
+  size = size ?? defaultProps.size
+  variant = variant ?? defaultProps.variant
+  fullWidth = fullWidth ?? defaultProps.fullWidth
+  disabled = disabled ?? defaultProps.disabled
+  className = className ?? defaultProps.className
+  buttonProps = buttonProps ?? defaultProps.buttonProps
 
   // styles
-  const className = twMerge(
-    styles.base,
-    styles.variant[variant],
-    variant === 'text' ? '' : styles.size[size],
+  const style = twMerge(
+    base,
+    variant !== 'text' && sizes[size],
+    classes(variants[variant]),
+    fullWidth && fullWidthStyles,
+    className,
   )
 
-  // anchor tag
-  if (href) {
-    return (
-      <a
-        className={className}
-        href={href}
-        target={external ? '_blank' : undefined}
-        onClick={disabled ? undefined : onClickWrapper}
-      >
-        {children}
-      </a>
-    )
-  }
-
-  // button
+  // return element
   return (
-    <button
-      type={type}
-      aria-disabled={disabled}
-      className={className}
-      onClick={disabled ? undefined : onClickWrapper}
-      disabled={disabled}
-    >
+    <button {...buttonProps} className={style} onClick={onClick} disabled={disabled}>
       {children}
     </button>
   )
