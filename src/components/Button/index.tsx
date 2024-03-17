@@ -78,12 +78,12 @@ export const Button = ({
   const { base, sizes, variants, fullWidth: fullWidthStyles } = styles
 
   // defaults
-  size ??= defaultProps.size
-  variant ??= defaultProps.variant
-  fullWidth ??= defaultProps.fullWidth
-  disabled ??= defaultProps.disabled
-  className ??= defaultProps.className
-  buttonProps ??= defaultProps.buttonProps
+  size = size ?? defaultProps.size
+  variant = variant ?? defaultProps.variant
+  fullWidth = fullWidth ?? defaultProps.fullWidth
+  disabled = disabled ?? defaultProps.disabled
+  className = className ?? defaultProps.className
+  buttonProps = buttonProps ?? defaultProps.buttonProps
 
   // styles
   const style = twMerge(
