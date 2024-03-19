@@ -1,8 +1,9 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 import { twMerge } from 'tailwind-merge'
 import { ButtonEvent } from '../../types/base/events'
 import {
   buttonProps,
+  children,
   className,
   disabled,
   fullWidth,
@@ -49,7 +50,7 @@ export interface ButtonProps {
   /**
    * Button contents
    */
-  children: ReactNode
+  children: children
 
   // Events
 

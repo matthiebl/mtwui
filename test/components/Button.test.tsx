@@ -9,7 +9,7 @@ describe('Button', () => {
     jest.resetAllMocks()
   })
 
-  it('should render a default button with text context', () => {
+  it('should render a default button with text content', () => {
     const { getByRole } = render(<Button>Click Me!</Button>)
     const button = getByRole('button')
 
